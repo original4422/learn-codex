@@ -1,0 +1,10 @@
+.cache/
+.local/
+dist/
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.DS_Store
+reports/live-*.json
+reports/live-*.jsonl

@@ -1,0 +1,234 @@
+{
+  "checked_at": "2026-09-19",
+  "repository": "https://github.com/openai/codex",
+  "tag": "rust-v0.155.1",
+  "tag_object": "4e21628f9ec9ee656650cd2b62ef92225725b5ac",
+  "commit": "be2951ea34f0d295ed0becf97079f92fa5f6950e",
+  "cli_version": "0.155.1",
+  "release_url": "https://github.com/openai/codex/releases/tag/rust-v0.155.1",
+  "source_archive_url": "https://codeload.github.com/openai/codex/tar.gz/be2951ea34f0d295ed0becf97079f92fa5f6950e",
+  "source_archive_sha256": "cd5a884836b53422052989479c6662f06e2ee8bb768c1a86a5ff7326b887d4d6",
+  "license": "Apache-2.0",
+  "verification": [
+    "Local codex --version returned codex-cli 0.155.1.",
+    "GitHub release and commit pages opened.",
+    "git ls-remote resolved the annotated tag and peeled commit.",
+    "Source tarball downloaded and extracted under ignored .cache/upstream; Cargo.toml version matched.",
+    "Selected source files read locally; hashes recorded for reproducibility."
+  ],
+  "documentation": {
+    "open_source": "https://learn.chatgpt.com/docs/open-source",
+    "cli": "https://learn.chatgpt.com/docs/cli",
+    "mcp": "https://learn.chatgpt.com/docs/extend/mcp",
+    "subagents": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+    "non_interactive": "https://learn.chatgpt.com/docs/non-interactive-mode",
+    "sdk": "https://learn.chatgpt.com/docs/codex-sdk",
+    "app_server": "https://learn.chatgpt.com/docs/app-server",
+    "desktop": "https://learn.chatgpt.com/docs/app",
+    "config": "https://learn.chatgpt.com/docs/config-reference",
+    "slash_commands": "https://learn.chatgpt.com/docs/slash-commands"
+  },
+  "sources": [
+    {
+      "topic": "cli",
+      "path": "codex-rs/cli/src/main.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/cli/src/main.rs",
+      "sha256": "aaa8e6b68c603f53572da2088bc7ec0469256a94e2c8f3f9858939c87ccc0902",
+      "lines": 5166
+    },
+    {
+      "topic": "exec_cli",
+      "path": "codex-rs/exec/src/cli.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/exec/src/cli.rs",
+      "sha256": "6abb86feb8fac2a192b34a617634527d0747b6d7fa09ee4827c0dc95abbe2f75",
+      "lines": 319
+    },
+    {
+      "topic": "exec_events",
+      "path": "codex-rs/exec/src/exec_events.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/exec/src/exec_events.rs",
+      "sha256": "c404928e0f2a463e19d1b263081c9d5e0380aec9f651a05ee0766f7bb7527f32",
+      "lines": 320
+    },
+    {
+      "topic": "agent_loop",
+      "path": "codex-rs/core/src/session/turn.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/session/turn.rs",
+      "sha256": "a7b7496a4dbe7c51a87de978e740efd658fa5c9513007c0a61bef1c4006a0bec",
+      "lines": 3033
+    },
+    {
+      "topic": "tool_router",
+      "path": "codex-rs/core/src/tools/router.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/tools/router.rs",
+      "sha256": "a3287f98195ebb1347e3b2ab47c470ccbe8d931b4fcbe23c80fc652855925248",
+      "lines": 385
+    },
+    {
+      "topic": "instructions",
+      "path": "codex-rs/core/src/agents_md.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/agents_md.rs",
+      "sha256": "da9e6ed6d88a0cec2a7951cff2898bb28fed9cdd6c7a516eda40b7c1e56cefb5",
+      "lines": 515
+    },
+    {
+      "topic": "skills_loading",
+      "path": "codex-rs/skills/src/loading.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/skills/src/loading.rs",
+      "sha256": "2278998af22d9a887d50dd5704858706398d46590f1689d68079414015aa60ad",
+      "lines": 119
+    },
+    {
+      "topic": "skills_parser",
+      "path": "codex-rs/skills/src/parser.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/skills/src/parser.rs",
+      "sha256": "f3532df1cc16f4da423b8e5c813269940c90317bcd211b6659cad449fd877e89",
+      "lines": 225
+    },
+    {
+      "topic": "approval",
+      "path": "codex-rs/core/src/tools/sandboxing.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/tools/sandboxing.rs",
+      "sha256": "24562573eff81521fa6f8d9228c683bacf103603a5b41c9ae36b59b6f2a995a9",
+      "lines": 534
+    },
+    {
+      "topic": "context",
+      "path": "codex-rs/core/src/context_manager/history.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/context_manager/history.rs",
+      "sha256": "95d0b6e038f84be49c0c371df0cbeaf60da904720a252258e2d8d23c59043a85",
+      "lines": 1144
+    },
+    {
+      "topic": "compaction_selection",
+      "path": "codex-rs/core/src/tasks/compact.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/tasks/compact.rs",
+      "sha256": "1c1627c7959294525a86fbd0fd1aaee23930d38992e3bd9a1fd7b4fe2ad1d96f",
+      "lines": 76
+    },
+    {
+      "topic": "compaction_local",
+      "path": "codex-rs/core/src/compact.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/compact.rs",
+      "sha256": "a8f9d29ec56ff5371c1efafb408ed149e9a14a87a44dfc6d461b9068389278c4",
+      "lines": 837
+    },
+    {
+      "topic": "compaction_remote",
+      "path": "codex-rs/core/src/compact_remote_v2.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/compact_remote_v2.rs",
+      "sha256": "34cb3b7b3cd172d8e2125feca408fe8e314c39f4dd29721ed54f92462ca4f25c",
+      "lines": 1242
+    },
+    {
+      "topic": "session_replay",
+      "path": "codex-rs/core/src/session/rollout_reconstruction.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/session/rollout_reconstruction.rs",
+      "sha256": "048377e181a9190503b2ee0c737cb926f772b0c42bb6a60e0ad485df11b53fb9",
+      "lines": 507
+    },
+    {
+      "topic": "mcp_client",
+      "path": "codex-rs/rmcp-client/src/rmcp_client.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/rmcp-client/src/rmcp_client.rs",
+      "sha256": "3691064efb920eb41df540a56547bb9ad75453f819ab93071e6b2da09e3e8a4e",
+      "lines": 1710
+    },
+    {
+      "topic": "mcp_dispatch",
+      "path": "codex-rs/core/src/tools/handlers/mcp.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/tools/handlers/mcp.rs",
+      "sha256": "5835f6bd623d48a2d48101769015e64d6172e5d2a9c67435c17a271a8bfbfdfa",
+      "lines": 865
+    },
+    {
+      "topic": "subagent_spawn",
+      "path": "codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs",
+      "sha256": "82f738243e40f075bdf2dc08613c5657e8ab5c6aa92aea0644c787a3ea65b317",
+      "lines": 355
+    },
+    {
+      "topic": "subagent_context",
+      "path": "codex-rs/core/src/session/multi_agents.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/session/multi_agents.rs",
+      "sha256": "e6c1a2195df45b7c6e82a0fa666ae2d495ced5b5506697eed74601b806a94570",
+      "lines": 203
+    },
+    {
+      "topic": "app_server_init",
+      "path": "codex-rs/app-server/src/request_processors/initialize_processor.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/app-server/src/request_processors/initialize_processor.rs",
+      "sha256": "538deb7e05fff1c1efbacb6967a12b2b870215d3c10651f826cc0a83348ac244",
+      "lines": 227
+    },
+    {
+      "topic": "typescript_sdk_exec",
+      "path": "sdk/typescript/src/exec.ts",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/sdk/typescript/src/exec.ts",
+      "sha256": "cac7c2ef4f834bc1cdca133d3950f229451460d9c495eb017dd931c63eaacc79",
+      "lines": 499
+    },
+    {
+      "topic": "typescript_sdk_thread",
+      "path": "sdk/typescript/src/thread.ts",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/sdk/typescript/src/thread.ts",
+      "sha256": "cc0dda041278e007ed5114da5081a45f14f01ad931601c026628b8c5cc8c534c",
+      "lines": 158
+    },
+    {
+      "topic": "python_sdk",
+      "path": "sdk/python/src/openai_codex/client.py",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/sdk/python/src/openai_codex/client.py",
+      "sha256": "8452afbd8148ea212c94e8a6727468054b175acb0daf95002c84b66b604d05a6",
+      "lines": 924
+    },
+    {
+      "topic": "global_instructions",
+      "path": "codex-rs/codex-home/src/instructions/mod.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/codex-home/src/instructions/mod.rs",
+      "sha256": "fad349ac9be95dfcbf5401d814f35a8cb118ab6cdfe3cf48ae89fda8b39e4614",
+      "lines": 77
+    },
+    {
+      "topic": "skills_discovery",
+      "path": "codex-rs/ext/skills/src/loader/discovery.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/ext/skills/src/loader/discovery.rs",
+      "sha256": "931e1f72f4338d611630cdedfed9eb08295586a09c357ca29242f29f927cb2c7",
+      "lines": 224
+    },
+    {
+      "topic": "skills_metadata",
+      "path": "codex-rs/ext/skills/src/loader/metadata.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/ext/skills/src/loader/metadata.rs",
+      "sha256": "0b203b4696b17ccf695bbcf8eb3a4e471e9c8b47477081126a06f98f35f600eb",
+      "lines": 268
+    },
+    {
+      "topic": "skills_render",
+      "path": "codex-rs/ext/skills/src/render.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/ext/skills/src/render.rs",
+      "sha256": "139e0af686ff573fc80f663eadbf43c6ff72f2e3ff3805bba0b00da2dbcbdb68",
+      "lines": 1187
+    },
+    {
+      "topic": "tool_orchestrator",
+      "path": "codex-rs/core/src/tools/orchestrator.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/core/src/tools/orchestrator.rs",
+      "sha256": "f879f324e0cbd120f29abd3e8497a48e76c14e2d93907fed4c037f7af5c1b89d",
+      "lines": 551
+    },
+    {
+      "topic": "event_processor",
+      "path": "codex-rs/exec/src/event_processor_with_jsonl_output.rs",
+      "url": "https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/exec/src/event_processor_with_jsonl_output.rs",
+      "sha256": "2f71fbf8a1b0a79bd342ed3c9caa414f1c5e06d9e52d6a94461799f304a9f255",
+      "lines": 635
+    }
+  ],
+  "limits": [
+    "No claim of live model success is implied by CLI help, schema generation, or protocol initialization.",
+    "Official docs are moving pages checked on checked_at; immutable GitHub commit is the source-reading baseline.",
+    "Desktop UI internals and hosted inference are outside this public-source map."
+  ]
+}
