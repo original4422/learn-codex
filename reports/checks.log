@@ -1,0 +1,382 @@
+$ python3 scripts/course.py check
+test_early_exit_is_not_success (test_adapters.AdapterTests.test_early_exit_is_not_success) ... ok
+test_environment_scopes_writes_inside_repository (test_adapters.AdapterTests.test_environment_scopes_writes_inside_repository) ... ok
+test_exited_launcher_does_not_leave_stdout_held_by_descendant (test_adapters.AdapterTests.test_exited_launcher_does_not_leave_stdout_held_by_descendant) ... ok
+test_installed_layout_finds_checkout_instead_of_site_packages (test_adapters.AdapterTests.test_installed_layout_finds_checkout_instead_of_site_packages) ... ok
+test_model_call_requires_explicit_flag (test_adapters.AdapterTests.test_model_call_requires_explicit_flag) ... ok
+test_output_budget_fails_and_reaps_process (test_adapters.AdapterTests.test_output_budget_fails_and_reaps_process) ... ok
+test_protocol_error_and_malformed_output_fail (test_adapters.AdapterTests.test_protocol_error_and_malformed_output_fail) ... ok
+test_protocol_response_ignores_notifications (test_adapters.AdapterTests.test_protocol_response_ignores_notifications) ... ok
+test_summary_validates_meaning_not_only_json_shape (test_adapters.AdapterTests.test_summary_validates_meaning_not_only_json_shape) ... ok
+test_synthetic_exec_timeout_replaces_stale_artifacts_with_partial_events (test_adapters.AdapterTests.test_synthetic_exec_timeout_replaces_stale_artifacts_with_partial_events) ... ok
+test_timeout_reaps_process (test_adapters.AdapterTests.test_timeout_reaps_process) ... ok
+test_acceptance_uses_target_local_cache_for_workspace_sandbox (test_exercise.ExerciseTests.test_acceptance_uses_target_local_cache_for_workspace_sandbox) ... ok
+test_exercise_copy_never_overwrites_work (test_exercise.ExerciseTests.test_exercise_copy_never_overwrites_work) ... ok
+test_reference_passes_blackbox_acceptance (test_exercise.ExerciseTests.test_reference_passes_blackbox_acceptance) ... ok
+test_starter_runs_but_feature_acceptance_fails (test_exercise.ExerciseTests.test_starter_runs_but_feature_acceptance_fails) ... ok
+test_bad_tool_arguments_are_protocol_errors (test_mcp.McpTests.test_bad_tool_arguments_are_protocol_errors) ... ok
+test_deep_task_json_is_a_tool_error_not_server_crash (test_mcp.McpTests.test_deep_task_json_is_a_tool_error_not_server_crash) ... ok
+test_failed_tool_is_result_with_iserror (test_mcp.McpTests.test_failed_tool_is_result_with_iserror) ... ok
+test_initialization_required_and_duplicate_rejected (test_mcp.McpTests.test_initialization_required_and_duplicate_rejected) ... ok
+test_initialize_rejects_missing_client_identity (test_mcp.McpTests.test_initialize_rejects_missing_client_identity) ... ok
+test_listing_read_and_stats (test_mcp.McpTests.test_listing_read_and_stats) ... ok
+test_malformed_envelopes_and_unknown_method (test_mcp.McpTests.test_malformed_envelopes_and_unknown_method) ... ok
+test_malformed_task_data_is_not_counted (test_mcp.McpTests.test_malformed_task_data_is_not_counted) ... ok
+test_malformed_tool_names_do_not_kill_stream_server (test_mcp.McpTests.test_malformed_tool_names_do_not_kill_stream_server) ... ok
+test_real_subprocess_transport (test_mcp.McpTests.test_real_subprocess_transport) ... ok
+test_stream_recovers_after_malformed_and_oversized_frame (test_mcp.McpTests.test_stream_recovers_after_malformed_and_oversized_frame) ... ok
+test_stream_recovers_from_deep_json_and_nonfinite_constants (test_mcp.McpTests.test_stream_recovers_from_deep_json_and_nonfinite_constants) ... ok
+test_traversal_symlink_extension_and_size_bounds (test_mcp.McpTests.test_traversal_symlink_extension_and_size_bounds) ... ok
+test_empty_global_override_falls_back (test_mechanisms.InstructionTests.test_empty_global_override_falls_back) ... ok
+test_empty_project_override_shadows_ordinary (test_mechanisms.InstructionTests.test_empty_project_override_shadows_ordinary) ... ok
+test_order_and_override (test_mechanisms.InstructionTests.test_order_and_override) ... ok
+test_scope_and_utf8_budget (test_mechanisms.InstructionTests.test_scope_and_utf8_budget) ... ok
+test_approval_does_not_grant_isolation (test_mechanisms.MechanismTests.test_approval_does_not_grant_isolation) ... ok
+test_compaction_fails_when_protected_facts_do_not_fit (test_mechanisms.MechanismTests.test_compaction_fails_when_protected_facts_do_not_fit) ... ok
+test_compaction_preserves_constraints_and_reduces_history (test_mechanisms.MechanismTests.test_compaction_preserves_constraints_and_reduces_history) ... ok
+test_duplicate_or_missing_review_rejected (test_mechanisms.MechanismTests.test_duplicate_or_missing_review_rejected) ... ok
+test_invalid_action_rejected (test_mechanisms.MechanismTests.test_invalid_action_rejected) ... ok
+test_loop_observes_tool_result_before_final (test_mechanisms.MechanismTests.test_loop_observes_tool_result_before_final) ... ok
+test_loop_reports_tool_failure_without_inventing_success (test_mechanisms.MechanismTests.test_loop_reports_tool_failure_without_inventing_success) ... ok
+test_loop_step_and_call_limits (test_mechanisms.MechanismTests.test_loop_step_and_call_limits) ... ok
+test_parallel_reviews_and_crosscheck (test_mechanisms.MechanismTests.test_parallel_reviews_and_crosscheck) ... ok
+test_unregistered_tool_is_observed_error (test_mechanisms.MechanismTests.test_unregistered_tool_is_observed_error) ... ok
+test_code_does_not_execute_or_turn_into_links (test_site.MarkdownTests.test_code_does_not_execute_or_turn_into_links) ... ok
+test_duplicate_headings_get_distinct_anchors (test_site.MarkdownTests.test_duplicate_headings_get_distinct_anchors) ... ok
+test_link_cannot_escape_repository (test_site.MarkdownTests.test_link_cannot_escape_repository) ... ok
+test_link_rewriting_preserves_fragments_and_languages (test_site.MarkdownTests.test_link_rewriting_preserves_fragments_and_languages) ... ok
+test_table_and_nested_inline_code (test_site.MarkdownTests.test_table_and_nested_inline_code) ... ok
+test_unclosed_fence_fails_build (test_site.MarkdownTests.test_unclosed_fence_fails_build) ... ok
+test_unsafe_links_cannot_execute (test_site.MarkdownTests.test_unsafe_links_cannot_execute) ... ok
+test_chapters_are_substantive_and_have_runnable_examples (test_site.TranslationTests.test_chapters_are_substantive_and_have_runnable_examples) ... ok
+test_complete_language_coverage (test_site.TranslationTests.test_complete_language_coverage) ... ok
+test_matching_section_and_code_block_coverage (test_site.TranslationTests.test_matching_section_and_code_block_coverage) ... ok
+test_add_list_done_and_deterministic_ids (test_taskboard.TaskboardTests.test_add_list_done_and_deterministic_ids) ... ok
+test_atomic_replace_failure_preserves_original_and_cleans_temp (test_taskboard.TaskboardTests.test_atomic_replace_failure_preserves_original_and_cleans_temp) ... ok
+test_bad_json_is_never_overwritten (test_taskboard.TaskboardTests.test_bad_json_is_never_overwritten) ... ok
+test_cli_roundtrip_and_error_exit (test_taskboard.TaskboardTests.test_cli_roundtrip_and_error_exit) ... ok
+test_deep_json_fails_without_traceback_or_overwrite (test_taskboard.TaskboardTests.test_deep_json_fails_without_traceback_or_overwrite) ... ok
+test_fifo_store_is_rejected_without_blocking (test_taskboard.TaskboardTests.test_fifo_store_is_rejected_without_blocking) ... ok
+test_ids_follow_max_not_array_length (test_taskboard.TaskboardTests.test_ids_follow_max_not_array_length) ... ok
+test_old_store_without_tags_is_readable (test_taskboard.TaskboardTests.test_old_store_without_tags_is_readable) ... ok
+test_reject_bad_title_tag_and_oversized_store (test_taskboard.TaskboardTests.test_reject_bad_title_tag_and_oversized_store) ... ok
+test_reject_invalid_data (test_taskboard.TaskboardTests.test_reject_invalid_data) ... ok
+test_unknown_id_preserves_original (test_taskboard.TaskboardTests.test_unknown_id_preserves_original) ... ok
+
+----------------------------------------------------------------------
+Ran 63 tests in 2.875s
+
+OK
+{
+  "check": "taskboard-skill-smoke",
+  "status": "passed",
+  "passed": [
+    "normalized_add",
+    "exact_tag_filter",
+    "completion_and_status",
+    "rejection_preserves_store"
+  ],
+  "scope": "real local subprocess behavior; no model invocation"
+}
+Built 39 pages → <REPO>/dist
+Validated 39 HTML pages, 1550 local links/assets and all translated routes
+
+[exit 0]
+
+$ python3 examples/taskboard/acceptance.py
+test_01_basic_roundtrip (__main__.Acceptance.test_01_basic_roundtrip) ... ok
+test_02_tags_normalize_deduplicate_and_match_exactly (__main__.Acceptance.test_02_tags_normalize_deduplicate_and_match_exactly) ... ok
+test_03_legacy_data_uses_empty_tags_and_next_max_id (__main__.Acceptance.test_03_legacy_data_uses_empty_tags_and_next_max_id) ... ok
+test_04_failed_operations_preserve_store (__main__.Acceptance.test_04_failed_operations_preserve_store) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.497s
+
+OK
+
+[exit 0]
+
+$ python3 scripts/course.py lab loop
+{
+  "implementation": "teaching mock",
+  "status": "completed",
+  "events": [
+    {
+      "type": "tool.started",
+      "step": 0,
+      "tool": "list_tasks"
+    },
+    {
+      "type": "tool.completed",
+      "step": 0,
+      "ok": true,
+      "value": [
+        {
+          "id": 2,
+          "title": "Add filter",
+          "done": false,
+          "tags": [
+            "feature",
+            "study"
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Test failure",
+          "done": false,
+          "tags": [
+            "test"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "final",
+      "step": 1,
+      "text": "2 open tasks remain."
+    }
+  ]
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab loop --fail-tool
+{
+  "implementation": "teaching mock",
+  "status": "completed",
+  "events": [
+    {
+      "type": "tool.started",
+      "step": 0,
+      "tool": "list_tasks"
+    },
+    {
+      "type": "tool.completed",
+      "step": 0,
+      "ok": false,
+      "error": "simulated read failure"
+    },
+    {
+      "type": "final",
+      "step": 1,
+      "text": "Could not inspect tasks; report the tool failure."
+    }
+  ]
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab loop --max-tool-calls 0
+{
+  "implementation": "teaching mock",
+  "status": "budget_exhausted",
+  "events": [
+    {
+      "type": "budget.exhausted",
+      "budget": "tool_calls"
+    }
+  ]
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab instructions
+{
+  "implementation": "teaching simplification",
+  "files": [
+    {
+      "path": "<REPO>/examples/instructions/home/AGENTS.md",
+      "text": "Teaching fixture only: prefer small, tested changes.\n",
+      "bytes": 53,
+      "truncated": false
+    },
+    {
+      "path": "<REPO>/examples/instructions/repo/AGENTS.md",
+      "text": "Teaching fixture only: task data must remain valid JSON.\n",
+      "bytes": 57,
+      "truncated": false
+    },
+    {
+      "path": "<REPO>/examples/instructions/repo/app/AGENTS.override.md",
+      "text": "Teaching fixture only: validate IDs before writing task data.\n",
+      "bytes": 62,
+      "truncated": false
+    }
+  ],
+  "bytes": 172,
+  "note": "Ordered text composition, not an instruction-conflict resolver."
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab policy --isolation read-only --approved
+{
+  "implementation": "teaching simulation; no OS sandbox installed",
+  "action": "write",
+  "approval_satisfied": true,
+  "isolation_allows": false,
+  "would_execute": false,
+  "note": "Approval alone does not change the execution boundary. These rules are illustrative, not Codex policy."
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab context
+{
+  "implementation": "teaching extractive compactor; characters, not tokens",
+  "before_chars": 2339,
+  "after_chars": 169,
+  "memory": [
+    {
+      "kind": "constraint",
+      "text": "Keep IDs deterministic. Never overwrite invalid JSON."
+    },
+    {
+      "kind": "decision",
+      "text": "Tags use exact normalized matching."
+    },
+    {
+      "kind": "open",
+      "text": "Need a regression test for replace failure."
+    },
+    {
+      "kind": "message",
+      "text": "Next: inspect tests/test_taskboard.py."
+    }
+  ],
+  "dropped_messages": 1
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab subagents
+{
+  "implementation": "teaching simulation using independent Python workers; no Codex agents",
+  "reports": [
+    {
+      "scope": "coverage",
+      "task_ids": [
+        3
+      ],
+      "evidence": "snapshot predicates"
+    },
+    {
+      "scope": "open-work",
+      "task_ids": [
+        2,
+        3
+      ],
+      "evidence": "snapshot predicates"
+    }
+  ],
+  "verified_against_snapshot": true
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab mcp-demo
+{
+  "verification": "real Python subprocess and MCP stdio; no Codex model/client",
+  "initialize": {
+    "protocolVersion": "2025-11-25",
+    "capabilities": {
+      "tools": {
+        "listChanged": false
+      }
+    },
+    "serverInfo": {
+      "name": "learn-codex-bounded-notes",
+      "version": "1.0.0"
+    }
+  },
+  "tools": [
+    {
+      "name": "read_note",
+      "description": "Read one UTF-8 .md/.txt/.json file under the configured root; max 8192 bytes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "task_stats",
+      "description": "Count total/open/done tasks from one JSON task array under the configured root.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
+  "read_note": {
+    "content": [
+      {
+        "type": "text",
+        "text": "# Taskboard review\n\nThree acceptance checks: deterministic IDs, exact tag filtering, and preservation of the original file if an atomic replace fails.\n"
+      }
+    ],
+    "isError": false
+  }
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab probe
+{
+  "verification": "real installed CLI; no model call",
+  "binary": "/opt/homebrew/bin/codex",
+  "version": "codex-cli 0.155.1",
+  "exec_flags": {
+    "--json": true,
+    "--output-schema": true,
+    "--ephemeral": true,
+    "--ignore-user-config": true
+  },
+  "app_server_stdio": true
+}
+
+[exit 0]
+
+$ python3 scripts/course.py lab app-server
+{
+  "verification": "real Codex App Server; no thread/start or turn/start; no model",
+  "initialize": {
+    "userAgent": "Codex Desktop/0.155.1 (Mac OS 15.7.8; arm64) dumb (learn_codex_lab; 1.0.0)",
+    "codexHome": "<REPO>/.cache/codex-home",
+    "platformFamily": "unix",
+    "platformOs": "macos"
+  },
+  "loaded_threads": {
+    "data": [],
+    "nextCursor": null
+  }
+}
+
+[exit 0]
