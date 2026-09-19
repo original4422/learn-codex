@@ -18,15 +18,16 @@
   ],
   "documentation": {
     "open_source": "https://learn.chatgpt.com/docs/open-source",
-    "cli": "https://learn.chatgpt.com/docs/cli",
+    "cli": "https://learn.chatgpt.com/docs/codex/cli",
     "mcp": "https://learn.chatgpt.com/docs/extend/mcp",
     "subagents": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
     "non_interactive": "https://learn.chatgpt.com/docs/non-interactive-mode",
     "sdk": "https://learn.chatgpt.com/docs/codex-sdk",
     "app_server": "https://learn.chatgpt.com/docs/app-server",
     "desktop": "https://learn.chatgpt.com/docs/app",
-    "config": "https://learn.chatgpt.com/docs/config-reference",
-    "slash_commands": "https://learn.chatgpt.com/docs/slash-commands"
+    "config": "https://learn.chatgpt.com/docs/config-file/config-reference",
+    "slash_commands": "https://learn.chatgpt.com/docs/reference/slash-commands",
+    "worktrees": "https://learn.chatgpt.com/docs/environments/git-worktrees"
   },
   "sources": [
     {
