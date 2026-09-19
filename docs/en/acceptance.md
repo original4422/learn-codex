@@ -25,7 +25,7 @@ Acceptance date: 2026-09-19. The objective is a complete local teaching project 
 | Installed entry point | Editable install in a fresh project-local virtual environment succeeded; `codex-lab loop` passed |
 | Pinned source verification | All 28 recorded files matched their SHA-256 hashes |
 | Real CLI and App Server | Both passed, with no model calls |
-| Real model | Attempt timed out; unverified and excluded from pass claims |
+| Real model | Unverified; only an unauthenticated CLI process timeout was observed, not a confirmed model request |
 
 ## Verification layers
 
@@ -33,7 +33,7 @@ Acceptance date: 2026-09-19. The objective is a complete local teaching project 
 
 **Real local Codex**: `codex --version` returned `codex-cli 0.155.1`; required exec flags were present. A real App Server completed `initialize → initialized → thread/loaded/list`, returning an empty loaded-thread list. It used an isolated project-local Codex home and made no model call.
 
-**Real model**: `python3 scripts/course.py lab exec --allow-model --timeout 20` was attempted and exited 2 with `subprocess deadline exceeded`. No `OPENAI_API_KEY`, `CODEX_API_KEY` or `CODEX_ACCESS_TOKEN` was available to the process, and the isolated course home had no established login. Timeout alone does not establish a single root cause. No successful completion event and fact-checked model result were obtained. Real model editing, model-driven MCP use and real Codex subagent collaboration remain **unverified**.
+**Real model**: the implementer attempted `python3 scripts/course.py lab exec --allow-model --timeout 20`, launching the installed `codex exec` without `--model` and without first agreeing on a model service and authentication method with the user. No `OPENAI_API_KEY`, `CODEX_API_KEY` or `CODEX_ACCESS_TOKEN` was available to the process, and the isolated course home had no established login. The evidence establishes only a local CLI timeout after 20 seconds: exit 2 with `subprocess deadline exceeded`. No record establishes the resolved model, service endpoint or whether a model service received a request. This must not be described as a confirmed model request timing out. Real model editing, model-driven MCP use and real Codex subagent collaboration remain **unverified**. Future live verification must first establish the user's chosen service, model and authentication method.
 
 **Website**: the requested OpenAI-inspired monochrome and clean sans-serif styling retains an independent learn-codex identity. The build generates every page in both languages; the root path directly displays Chinese. The builder checks internal links, anchors, downloadable source links and assets. Actual browser interaction and viewport results are listed in the browser entry of the machine record.
 

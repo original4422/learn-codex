@@ -25,7 +25,7 @@
 | 安装后运行 | 项目内新虚拟环境 editable 安装成功，`codex-lab loop` 通过 |
 | 固定源码核对 | 28 个已记录文件的 SHA-256 全部一致 |
 | 真实 CLI 与 App Server | 均通过，不调用模型 |
-| 真实模型 | 尝试超时，未验证；不计入通过项 |
+| 真实模型 | 未验证；仅观察到未登录 CLI 进程超时，未确认模型请求 |
 
 ## 验证分层
 
@@ -33,7 +33,7 @@
 
 **真实本地 Codex**：本机 `codex --version` 返回 `codex-cli 0.155.1`；必需 exec 参数检查通过；真实 App Server 完成 `initialize → initialized → thread/loaded/list`，返回空的已加载会话列表。这使用的是项目内隔离的 Codex home，不调用模型。
 
-**真实模型**：尝试了 `python3 scripts/course.py lab exec --allow-model --timeout 20`，结果为退出码 2、`subprocess deadline exceeded`。当前进程没有可用的 `OPENAI_API_KEY`、`CODEX_API_KEY` 或 `CODEX_ACCESS_TOKEN`，课程隔离 home 中也未建立登录。超时本身不能证明唯一根因。没有得到成功完成事件与经过事实校验的模型结果，故真实模型编辑、真实模型 MCP 调用、真实 Codex 子 Agent 协作均标记为**未验证**。
+**真实模型**：执行者尝试了 `python3 scripts/course.py lab exec --allow-model --timeout 20`，它启动本机 `codex exec`，但没有传 `--model`，也没有事先与用户确定模型服务和认证方式。进程没有可用的 `OPENAI_API_KEY`、`CODEX_API_KEY` 或 `CODEX_ACCESS_TOKEN`，课程隔离 home 中也未建立登录。可确认的结果仅为本地 CLI 等待 20 秒后退出码 2、`subprocess deadline exceeded`；没有记录能够确认实际解析出的模型、服务地址，或请求是否到达模型服务。因此不能称为“真实模型请求超时”。真实模型编辑、真实模型 MCP 调用、真实 Codex 子 Agent 协作均为**未验证**。后续真实验证需先明确用户选择的服务、模型与认证方式。
 
 **网站**：按用户要求参考 OpenAI 的黑白灰与简洁无衬线排版，保留独立 learn-codex 标识。构建生成两种语言全部页面，根路径直接展示中文。内部链接、锚点、源码下载链接与静态资源由构建器检查。浏览器交互与视口检查的实际结果见机器记录中的浏览器条目。
 

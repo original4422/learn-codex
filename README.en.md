@@ -56,7 +56,7 @@ CODEX_HOME="$PWD/.cache/codex-home" codex login
 python3 scripts/course.py lab exec --allow-model
 ```
 
-Simulations, real protocols and real model runs are recorded separately. The delivery environment passed real CLI and App Server checks. The model request did not complete successfully, so no passing model task is claimed; see the [acceptance record](docs/en/acceptance.md).
+Simulations, real protocols and real model runs are recorded separately. The delivery environment passed real CLI and App Server checks. An unauthenticated CLI execution attempt with no explicit model selection timed out locally; the evidence does not establish which model service, if any, received a request. Real model behavior remains unverified; see the [acceptance record](docs/en/acceptance.md).
 
 ## Version, scope and license
 

@@ -56,7 +56,7 @@ CODEX_HOME="$PWD/.cache/codex-home" codex login
 python3 scripts/course.py lab exec --allow-model
 ```
 
-本地模拟、真实协议、真实模型三种验证分别记录。交付环境的真实 CLI / App Server 已验证；模型请求未成功完成，不宣称真实模型任务通过，详情见[验收记录](docs/zh/acceptance.md)。
+本地模拟、真实协议、真实模型三种验证分别记录。交付环境的真实 CLI / App Server 已验证；一次未指定模型、未登录的 CLI 在线执行尝试在本地超时，没有证据确认请求到达了哪个模型服务。真实模型仍未验证，详情见[验收记录](docs/zh/acceptance.md)。
 
 ## 版本、范围与许可证
 

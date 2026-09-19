@@ -122,13 +122,19 @@
     "temporary_viewport_override_reset": true
   },
   "real_model": {
-    "status": "attempt_failed_unverified",
+    "status": "unverified_cli_process_timed_out",
     "command": "python3 scripts/course.py lab exec --allow-model --timeout 20",
     "exit_code": 2,
     "observed_error": "subprocess deadline exceeded",
     "credential_environment_present": false,
     "isolated_home_authenticated": false,
-    "note": "Timeout does not establish a unique root cause. No successful completed turn and validated final result."
+    "note": "Only the unauthenticated local CLI process timeout was observed. No record establishes a resolved model, endpoint, or request reaching a model service. The earlier phrase real model request timed out overstated the evidence.",
+    "attempted_layer": "local_codex_exec_process",
+    "explicit_model": null,
+    "resolved_model": null,
+    "provider_endpoint": null,
+    "request_reached_provider": "not_established",
+    "model_and_auth_confirmed_with_user": false
   },
   "independent_checks": [
     {
