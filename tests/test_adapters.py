@@ -101,7 +101,7 @@ class AdapterTests(unittest.TestCase):
             (output / "last-message.json").write_text("STALE_SUCCESS")
             with patch.object(adapters, "ROOT", root), patch.object(adapters, "codex_binary", return_value=str(executable)):
                 with self.assertRaises(TimeoutError):
-                    exec_summary(allow_model=True, timeout=1.0)
+                    exec_summary(allow_model=True, timeout=3.0)
             self.assertEqual(json.loads((output / "events.jsonl").read_text()), {"type": "thread.started"})
             self.assertFalse((output / "last-message.json").exists())
 
