@@ -85,7 +85,7 @@ The command uses that login without copying credentials or rewriting configurati
 
 Each attempt has its own directory: `phases.jsonl` records preparation, isolation, model and independent acceptance stages; `events.jsonl` contains actual model events; `candidate.diff` compares against the starter; `result.json` stores six verdicts, elapsed time and source hashes. The model deadline defaults to 240 seconds (maximum 600), and execution stops after more than 20 completed tool events. There is no automatic retry. Failed attempts retain their evidence. Exit 0 means independent acceptance passed, 1 means an attempted run did not pass, and 2 means an argument or authentication precondition failed.
 
-Default `check` and CI run offline tests only. They verify rejection of the starter, a substring-filter mutation and a missing tag-length-limit mutation. Private model transcripts stay in ignored `.cache/`; see the [real coding record](../../reports/taskboard-live-exercise-2026-09-30.md) for public results.
+Default `check` and CI run offline tests only. They verify rejection of the starter, a substring-filter mutation, a missing tag-length-limit mutation and a `done`-clears-tags mutation. Private model transcripts stay in ignored `.cache/`; see the [real coding record](../../reports/taskboard-live-exercise-2026-09-30.md) and the [no-model recheck with strengthened tag-preservation assertions](../../reports/taskboard-tags-recheck-2026-09-30.md) for public results.
 
 ## Troubleshooting order
 

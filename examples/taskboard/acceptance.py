@@ -39,8 +39,11 @@ class Acceptance(unittest.TestCase):
         self.assertEqual(task["tags"], ["study", "test"])
         self.run_cli("add", "Other", "--tag", "study-guide")
         self.assertEqual([t["id"] for t in self.run_cli("list", "--tag", " STUDY ")], [1])
-        self.run_cli("done", "1")
+        self.assertEqual(self.run_cli("done", "1")["tags"], ["study", "test"])
         self.assertEqual(self.run_cli("list", "--tag", "study", "--status", "open"), [])
+        completed = self.run_cli("list", "--tag", "study", "--status", "done")
+        self.assertEqual([t["id"] for t in completed], [1])
+        self.assertEqual(completed[0]["tags"], ["study", "test"])
 
     def test_03_legacy_data_uses_empty_tags_and_next_max_id(self):
         self.store.write_text('[{"id":7,"title":"Legacy","done":false}]')

@@ -66,11 +66,13 @@ python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex"
 
 The command copies the starter into a fresh workspace, verifies that the sandbox blocks the reference/evaluator/login directory, runs native Codex, and independently checks six behaviors. It preserves each attempt under ignored `.cache/exercises/`. See the [protocol and measured result](reports/taskboard-live-exercise-2026-09-30.md) and [lab guide](docs/en/labs.md). Default tests and CI stay offline.
 
+Independent review added assertions that `done` preserves tags. The archived real candidate still passes 6/6 under the strengthened sandboxed evaluation; see the [no-model recheck](reports/taskboard-tags-recheck-2026-09-30.md).
+
 ## Current capabilities and verification
 
 | Path | Verified capability |
 | --- | --- |
-| Offline course | 75 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
+| Offline course | 76 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
 | Mechanism labs | Scripted tool loop, instruction discovery, policy, context and parallel aggregation |
 | Real protocols | Python MCP stdio subprocess; Codex 0.155.1 CLI probe and App Server handshake |
 | Real model | One `exercise` run edited the starter and passed 6/6 external checks; private events, diff and hashes retained |

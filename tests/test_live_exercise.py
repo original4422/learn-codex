@@ -42,6 +42,12 @@ class ExerciseTests(unittest.TestCase):
         self.assertNotEqual(faulty, self.reference)
         self.assertFalse(self.verdict(faulty)['checks'][5]['passed'])
 
+    def test_done_clearing_tags_rejected(self):
+        faulty = self.reference.replace('task["done"] = True',
+                                        'task["done"] = True\n            task["tags"] = []')
+        self.assertNotEqual(faulty, self.reference)
+        self.assertFalse(self.verdict(faulty)['checks'][1]['passed'])
+
     def test_opt_in_before_auth_or_model_launch(self):
         with patch.object(exercise.adapters, 'codex_binary') as binary:
             with self.assertRaisesRegex(ValueError, '--allow-model'):

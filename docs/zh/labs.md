@@ -85,7 +85,7 @@ python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex"
 
 每次尝试拥有独立目录：`phases.jsonl` 是准备、隔离、模型和独立验收阶段，`events.jsonl` 是真实模型事件，`candidate.diff` 是相对 starter 的改动，`result.json` 保存六项判定、耗时和源文件 hash。模型有 240 秒默认期限（最大 600 秒），超过 20 个已完成工具事件即终止；不会自动重试。失败保留本次证据。退出码 0 表示独立验收通过，1 表示已运行但未通过，2 表示参数或认证前置条件失败。
 
-默认 `check` 和 CI 只运行离线测试，不调用模型。它们确认 starter、子串匹配错误版和缺失标签长度限制版会被拒绝。私有模型原文留在忽略的 `.cache/`；公开结果见 [真实编程记录](../../reports/taskboard-live-exercise-2026-09-30.md)。
+默认 `check` 和 CI 只运行离线测试，不调用模型。它们确认 starter、子串匹配错误版、缺失标签长度限制版和 `done` 清空标签错误版会被拒绝。私有模型原文留在忽略的 `.cache/`；公开结果见 [真实编程记录](../../reports/taskboard-live-exercise-2026-09-30.md)和[补充标签保留断言后的无模型重验](../../reports/taskboard-tags-recheck-2026-09-30.md)。
 
 ## 排查顺序
 
