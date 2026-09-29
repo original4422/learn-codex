@@ -37,6 +37,8 @@ python3 scripts/course.py lab mcp-demo
 
 第 1 章带你建立一个练习副本，在保留旧接口的前提下实现过滤。第 2 章检查失败和回归；第 5 章把验收流程收进可调用 Skill。不要直接编辑参考实现来伪造“练习通过”；保留起点与完成后的 diff 才能复盘。
 
+运行 `python3 examples/taskboard/acceptance.py --script .local/taskboard-practice/taskboard.py` 检查练习。六项检查覆盖基本 CLI、标签归一化与排序、精确过滤、旧数据和数据保全。边界检查接受 40 字符标签、归一化后 20 个不同标签，并允许重复输入。空标签、41 字符标签和 21 个不同标签必须以退出码 2 失败，存储文件逐字节保持不变。课程测试还会验证：删除标签校验或排序的实现会被验收器拒绝。
+
 ```sh
 python3 scripts/course.py test
 python3 examples/taskboard/.agents/skills/taskboard-check/scripts/check.py

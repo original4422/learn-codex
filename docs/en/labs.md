@@ -37,6 +37,8 @@ The [reference implementation](../../examples/taskboard/taskboard.py) provides `
 
 Chapter 1 creates an exercise copy where you implement filtering while preserving the existing interface. Chapter 2 checks failure and regression paths. Chapter 5 packages acceptance in a callable Skill. Keep the starter and final diff for a useful retrospective instead of editing the reference merely to manufacture a passing exercise.
 
+Run `python3 examples/taskboard/acceptance.py --script .local/taskboard-practice/taskboard.py` to check your exercise. Its six checks cover the basic CLI, tag normalization and sorting, exact filtering, legacy records, and data preservation. Boundary checks accept 40-character tags and 20 distinct normalized tags, including repeated input values. Empty tags, 41-character tags and 21 distinct tags must exit with code 2 and preserve the store byte for byte. The course tests also verify that the checker rejects implementations with tag validation or sorting removed.
+
 ```sh
 python3 scripts/course.py test
 python3 examples/taskboard/.agents/skills/taskboard-check/scripts/check.py
