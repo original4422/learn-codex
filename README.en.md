@@ -58,14 +58,22 @@ CODEX_HOME="$PWD/.cache/codex-home" codex login
 python3 scripts/course.py lab exec --allow-model
 ```
 
+For a complete coding exercise using an existing login, explicitly select its home:
+
+```sh
+python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex" --timeout 240
+```
+
+The command copies the starter into a fresh workspace, verifies that the sandbox blocks the reference/evaluator/login directory, runs native Codex, and independently checks six behaviors. It preserves each attempt under ignored `.cache/exercises/`. See the [protocol and measured result](reports/taskboard-live-exercise-2026-09-30.md) and [lab guide](docs/en/labs.md). Default tests and CI stay offline.
+
 ## Current capabilities and verification
 
 | Path | Verified capability |
 | --- | --- |
-| Offline course | 65 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
+| Offline course | 75 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
 | Mechanism labs | Scripted tool loop, instruction discovery, policy, context and parallel aggregation |
 | Real protocols | Python MCP stdio subprocess; Codex 0.155.1 CLI probe and App Server handshake |
-| Real model | `exec --allow-model` is available; end-to-end model execution remains unverified |
+| Real model | One `exercise` run edited the starter and passed 6/6 external checks; private events, diff and hashes retained |
 
 Offline mechanism labs are teaching simplifications. Taskboard uses a single-writer JSON store. Real CLI evidence was collected on 2026-09-19; see the [2026-09-30 offline results](reports/taskboard-acceptance-2026-09-30.md) and [historical acceptance record](docs/en/acceptance.md).
 

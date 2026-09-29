@@ -17,6 +17,7 @@
 | `probe` | 安装版本及必需 CLI 参数 | 真实 CLI，无模型 |
 | `app-server` | initialize → initialized → thread/loaded/list | 真实 App Server，无模型 |
 | `exec --allow-model` | JSONL 事件、结构化结果及事实校验 | 真实模型，需要认证 |
+| `exercise --allow-model` | 修改 starter 并独立验收六项行为 | 真实编程任务；需要认证 |
 
 ## 运行与读输出
 
@@ -71,6 +72,20 @@ python3 scripts/course.py lab exec --allow-model --timeout 120
 模型实验要求读取固定样例，返回 `project`、`total_tasks`、`open_tasks`、`summary` 四个字段。程序同时检查进程退出码、`turn.completed`、错误事件、JSON 字段与数据中的实际计数。单有合法 JSON 不足以证明答案正确。
 
 样例是三项任务，其中两项未完成。输出 JSON Schema 保存在 `.cache/real-exec/schema.json`，每次运行会先清除旧输出，再把收到的事件逐条刷新到 `events.jsonl`，最终消息在 `last-message.json`。超时时会保留本次已经收到的部分事件，但部分事件不能视为成功；以 CLI 错误、完成事件与结果校验共同判断。不要提交包含个人上下文的真实运行日志。
+
+## 真实编程练习
+
+`exercise` 会把 starter 复制到新的 `.cache/exercises/taskboard-*/workspace`，让真实 Codex 读取、修改并自检，再由工作区外的验收器检查六项行为。默认仍使用课程 `.cache/codex-home`；也可以显式选择一个已登录的 Codex home：
+
+```sh
+python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex" --model gpt-6-sol --timeout 240
+```
+
+这个命令使用所选登录，不复制凭据、不改写配置。它通过 `--ignore-user-config` 与 `--ephemeral` 运行；原生工具使用临时命名权限配置，禁止读取用户 home 和课程目录，仅允许候选目录读写。运行前用真实 sandbox 探针确认参考答案、外部验收器和登录目录不可读；探针不通过就不调用模型。该路径要求支持命名 filesystem 权限及 `codex sandbox` 的 CLI；实测版本为 0.155.1 / macOS。
+
+每次尝试拥有独立目录：`phases.jsonl` 是准备、隔离、模型和独立验收阶段，`events.jsonl` 是真实模型事件，`candidate.diff` 是相对 starter 的改动，`result.json` 保存六项判定、耗时和源文件 hash。模型有 240 秒默认期限（最大 600 秒），超过 20 个已完成工具事件即终止；不会自动重试。失败保留本次证据。退出码 0 表示独立验收通过，1 表示已运行但未通过，2 表示参数或认证前置条件失败。
+
+默认 `check` 和 CI 只运行离线测试，不调用模型。它们确认 starter、子串匹配错误版和缺失标签长度限制版会被拒绝。私有模型原文留在忽略的 `.cache/`；公开结果见 [真实编程记录](../../reports/taskboard-live-exercise-2026-09-30.md)。
 
 ## 排查顺序
 

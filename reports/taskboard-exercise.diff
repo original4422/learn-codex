@@ -1,0 +1,99 @@
+--- starter.py
++++ taskboard.py
+@@ -13,6 +13,23 @@
+ 
+ MAX_BYTES = 1_000_000
+ MAX_TASKS = 10_000
++MAX_TAGS = 20
++
++
++def normalize_tag(tag):
++    if not isinstance(tag, str):
++        raise ValueError("tags must be strings")
++    tag = tag.strip().lower()
++    if not 1 <= len(tag) <= 40:
++        raise ValueError("tags must contain 1–40 characters")
++    return tag
++
++
++def normalize_tags(tags):
++    result = sorted({normalize_tag(tag) for tag in tags})
++    if len(result) > MAX_TAGS:
++        raise ValueError("tasks may have at most 20 distinct tags")
++    return result
+ 
+ 
+ def validate(data):
+@@ -20,7 +37,7 @@
+         raise ValueError("store must be a JSON array with at most 10000 tasks")
+     ids = set()
+     for task in data:
+-        if not isinstance(task, dict) or set(task) != {"id", "title", "done"}:
++        if not isinstance(task, dict) or not {"id", "title", "done"} <= set(task) or set(task) - {"id", "title", "done", "tags"}:
+             raise ValueError("invalid task fields")
+         if type(task["id"]) is not int or task["id"] < 1 or task["id"] in ids:
+             raise ValueError("task IDs must be distinct positive integers")
+@@ -28,6 +45,11 @@
+             raise ValueError("task titles must contain 1–200 characters")
+         if type(task["done"]) is not bool:
+             raise ValueError("task done must be a boolean")
++        if "tags" not in task:
++            task["tags"] = []
++        tags = task["tags"]
++        if not isinstance(tags, list) or tags != normalize_tags(tags):
++            raise ValueError("invalid task tags")
+         ids.add(task["id"])
+     return data
+ 
+@@ -70,23 +92,27 @@
+             temporary.unlink(missing_ok=True)
+ 
+ 
+-def add(store, title):
++def add(store, title, tags=()):
+     title = title.strip()
+     if not title or len(title) > 200:
+         raise ValueError("title must contain 1–200 characters")
++    tags = normalize_tags(tags)
+     tasks = load(store)
+     task = {"id": max((t["id"] for t in tasks), default=0) + 1,
+-            "title": title, "done": False}
++            "title": title, "done": False, "tags": tags}
+     tasks.append(task)
+     save(store, tasks)
+     return task
+ 
+ 
+-def list_tasks(store, status="all"):
++def list_tasks(store, status="all", tag=None):
+     if status not in {"all", "open", "done"}:
+         raise ValueError("status must be all, open, or done")
++    if tag is not None:
++        tag = normalize_tag(tag)
+     return [t for t in load(store)
+-            if status == "all" or t["done"] == (status == "done")]
++            if (status == "all" or t["done"] == (status == "done"))
++            and (tag is None or tag in t["tags"])]
+ 
+ 
+ def done(store, task_id):
+@@ -105,15 +131,17 @@
+     commands = parser.add_subparsers(dest="command", required=True)
+     add_parser = commands.add_parser("add")
+     add_parser.add_argument("title")
++    add_parser.add_argument("--tag", action="append", default=[])
+     list_parser = commands.add_parser("list")
+     list_parser.add_argument("--status", choices=["all", "open", "done"], default="all")
++    list_parser.add_argument("--tag")
+     commands.add_parser("done").add_argument("id", type=int)
+     args = parser.parse_args(argv)
+     try:
+         if args.command == "add":
+-            result = add(args.store, args.title)
++            result = add(args.store, args.title, args.tag)
+         elif args.command == "list":
+-            result = list_tasks(args.store, args.status)
++            result = list_tasks(args.store, args.status, args.tag)
+         else:
+             result = done(args.store, args.id)
+     except (ValueError, OSError) as error:

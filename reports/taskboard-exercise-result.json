@@ -1,0 +1,107 @@
+{
+  "verification": "real Codex coding task; external black-box acceptance",
+  "status": "passed",
+  "model": "gpt-6-sol",
+  "protected_sha256": {
+    "starter.py": "05990022c3aba0bbcb1a4326e163e7f99e793aa715951d973a972f667dfe74f1",
+    "taskboard.py": "7cf44ec31ec906260d5ae8fd0e0543bb88e3e27a63a43b48cab87ef2516f7cea",
+    "acceptance.py": "22446525017ecd063dcef57d19b34f51aa873a6aa5331caf887538ae8b88d563"
+  },
+  "max_tool_calls": 20,
+  "timeout_seconds": 240.0,
+  "isolation": "workspace read/write allowed; answer, oracle, auth directory denied",
+  "model_exit_code": 0,
+  "usage": [
+    {
+      "input_tokens": 161563,
+      "cached_input_tokens": 123904,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2008,
+      "reasoning_output_tokens": 185
+    }
+  ],
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "test_01_basic_roundtrip",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_02_tags_normalize_deduplicate_and_match_exactly",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_03_legacy_data_uses_empty_tags_and_next_max_id",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_04_failed_operations_preserve_store",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_05_tag_limits_accept_boundary_values_after_normalization",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_06_invalid_tags_fail_without_changing_store",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      }
+    ]
+  },
+  "protected_unchanged": true,
+  "candidate_sha256": "7e4782e2f2e1ef60ae4fefdfce37847c90baee435406387a02e5170bf08aadc4",
+  "elapsed_seconds": 61.958,
+  "event_types": [
+    "item.completed",
+    "item.started",
+    "thread.started",
+    "turn.completed",
+    "turn.started"
+  ],
+  "cli_version": "0.155.1",
+  "python_version": "3.14.7",
+  "platform": "Darwin 15.7.8",
+  "phases": [
+    {
+      "phase": "prepared",
+      "elapsed_seconds": 0.0
+    },
+    {
+      "phase": "isolation_checked",
+      "elapsed_seconds": 0.039
+    },
+    {
+      "phase": "model_started",
+      "elapsed_seconds": 0.039
+    },
+    {
+      "phase": "model_finished",
+      "elapsed_seconds": 60.764,
+      "tool_calls": 8
+    },
+    {
+      "phase": "independent_acceptance",
+      "elapsed_seconds": 61.956,
+      "passed": true
+    }
+  ],
+  "initial_command_failures": {
+    "count": 3,
+    "exit_code": 127,
+    "cause": "inherit=none left no general PATH; model recovered with absolute executables in the same turn"
+  },
+  "post_run_change": "Set minimal PATH/HOME/TMPDIR explicitly. Verified native sandbox shell without a model; no new model run."
+}

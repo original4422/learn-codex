@@ -58,14 +58,22 @@ CODEX_HOME="$PWD/.cache/codex-home" codex login
 python3 scripts/course.py lab exec --allow-model
 ```
 
+要用已有登录完成一次真实编程练习，显式选择对应 home：
+
+```sh
+python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex" --timeout 240
+```
+
+命令复制 starter 到新工作区，先验证沙箱阻止读取答案、验收器与登录目录，再运行原生 Codex，最后独立检查六项行为。每次尝试保存在忽略的 `.cache/exercises/` 中。参见[协议与实测结果](reports/taskboard-live-exercise-2026-09-30.md)及[实验指南](docs/zh/labs.md)。默认测试和 CI 仍为离线运行。
+
 ## 当前能力与验证
 
 | 路径 | 已验证能力 |
 | --- | --- |
-| 离线课程 | 65 项行为测试、6 项 Taskboard 验收；中文与英文网站共 39 页 |
+| 离线课程 | 75 项行为测试、6 项 Taskboard 验收；中文与英文网站共 39 页 |
 | 机制实验 | 固定脚本工具循环、指令发现、策略、上下文和并发聚合 |
 | 真实协议 | Python MCP stdio 子进程；Codex 0.155.1 CLI 探测与 App Server 握手 |
-| 真实模型 | 提供 `exec --allow-model` 路径，端到端模型运行尚未验证 |
+| 真实模型 | `exercise` 一次真实读改自检，通过 6/6 外部验收；保留事件、diff 与 hash |
 
 离线机制实验是教学简化；Taskboard 使用单写者 JSON 存储。真实 CLI 记录采集于 2026-09-19；最近的离线验收见 [2026-09-30 记录](reports/taskboard-acceptance-2026-09-30.md)，历史验证详情见[验收记录](docs/zh/acceptance.md)。
 
