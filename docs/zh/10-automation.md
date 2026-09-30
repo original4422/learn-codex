@@ -129,8 +129,8 @@ PY
 
 ```sh
 mkdir -p .local
-mkdir .local/completion-practice
-cp examples/completion/starter.py .local/completion-practice/consumer.py
+mkdir .local/completion-practice &&
+  cp examples/completion/starter.py .local/completion-practice/consumer.py
 python3 examples/completion/acceptance.py --script .local/completion-practice/consumer.py
 # 对照参考实现：
 python3 examples/completion/acceptance.py

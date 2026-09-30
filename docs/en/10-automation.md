@@ -129,8 +129,8 @@ Copy the faulty consumer into a new practice directory, then run the trusted che
 
 ```sh
 mkdir -p .local
-mkdir .local/completion-practice
-cp examples/completion/starter.py .local/completion-practice/consumer.py
+mkdir .local/completion-practice &&
+  cp examples/completion/starter.py .local/completion-practice/consumer.py
 python3 examples/completion/acceptance.py --script .local/completion-practice/consumer.py
 # Compare the reference implementation:
 python3 examples/completion/acceptance.py
