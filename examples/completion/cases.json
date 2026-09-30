@@ -1,0 +1,378 @@
+{
+  "implementation": "fictional projected App Server events; no model or live server",
+  "cases": [
+    {
+      "name": "ack-is-not-completion",
+      "context": {
+        "thread_id": "thread-course",
+        "compact_request_id": 7,
+        "followup_request_id": 8,
+        "prior_turn_ids": [
+          "turn-old"
+        ]
+      },
+      "steps": [
+        {
+          "event": {
+            "id": 7,
+            "result": {}
+          },
+          "expected": "wait"
+        }
+      ]
+    },
+    {
+      "name": "bound-compaction-and-followup",
+      "context": {
+        "thread_id": "thread-course",
+        "compact_request_id": 7,
+        "followup_request_id": 8,
+        "prior_turn_ids": [
+          "turn-old"
+        ]
+      },
+      "steps": [
+        {
+          "event": {
+            "id": 7,
+            "result": {}
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/started",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-old",
+              "item": {
+                "type": "contextCompaction",
+                "id": "old-item"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-old",
+              "item": {
+                "type": "contextCompaction",
+                "id": "old-item"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/started",
+            "params": {
+              "threadId": "other-thread",
+              "turnId": "other-turn",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "other-thread",
+              "turnId": "other-turn",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "other-thread",
+              "turn": {
+                "id": "other-turn",
+                "status": "completed"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/started",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "wrong-item"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turn": {
+                "id": "turn-old",
+                "status": "completed"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turn": {
+                "id": "turn-compact",
+                "status": "completed"
+              }
+            }
+          },
+          "expected": "continue"
+        },
+        {
+          "event": {
+            "id": 8,
+            "result": {
+              "turn": {
+                "id": "turn-followup",
+                "status": "inProgress"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turn": {
+                "id": "turn-compact",
+                "status": "completed"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-followup",
+              "item": {
+                "type": "agentMessage",
+                "id": "answer"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turn": {
+                "id": "turn-followup",
+                "status": "completed"
+              }
+            }
+          },
+          "expected": "verify"
+        }
+      ],
+      "answers": [
+        {
+          "name": "correct-count",
+          "value": {
+            "project": "taskboard",
+            "total_tasks": 3,
+            "open_tasks": 2,
+            "summary": "Two open tasks."
+          },
+          "accepted": true
+        },
+        {
+          "name": "wrong-count",
+          "value": {
+            "project": "taskboard",
+            "total_tasks": 3,
+            "open_tasks": 99,
+            "summary": "Two open tasks."
+          },
+          "accepted": false
+        }
+      ]
+    },
+    {
+      "name": "item-finished-turn-interrupted",
+      "context": {
+        "thread_id": "thread-course",
+        "compact_request_id": 7,
+        "followup_request_id": 8,
+        "prior_turn_ids": [
+          "turn-old"
+        ]
+      },
+      "steps": [
+        {
+          "event": {
+            "id": 7,
+            "result": {}
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/started",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turn": {
+                "id": "turn-compact",
+                "status": "interrupted"
+              }
+            }
+          },
+          "expected": "failed"
+        }
+      ]
+    },
+    {
+      "name": "terminal-without-compaction-item",
+      "context": {
+        "thread_id": "thread-course",
+        "compact_request_id": 7,
+        "followup_request_id": 8,
+        "prior_turn_ids": [
+          "turn-old"
+        ]
+      },
+      "steps": [
+        {
+          "event": {
+            "id": 7,
+            "result": {}
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/started",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "compact-1"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turnId": "turn-compact",
+              "item": {
+                "type": "contextCompaction",
+                "id": "unrelated-item"
+              }
+            }
+          },
+          "expected": "wait"
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "thread-course",
+              "turn": {
+                "id": "turn-compact",
+                "status": "completed"
+              }
+            }
+          },
+          "expected": "wait"
+        }
+      ]
+    }
+  ]
+}

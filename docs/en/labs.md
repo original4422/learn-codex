@@ -47,6 +47,15 @@ python3 examples/taskboard/.agents/skills/taskboard-check/scripts/check.py
 
 The Skill script performs independent black-box CLI checks. It provides cross-checking evidence rather than replacing the full test suite.
 
+## Offline compaction and follow-up completion checks
+
+```sh
+python3 examples/completion/acceptance.py
+python3 examples/completion/acceptance.py --script examples/completion/starter.py
+```
+
+The first command accepts the reference and exits 0. The second rejects the starter that treats compact acknowledgment as completion and exits 1. Four fictional cases check every event prefix, then reuse Taskboard summary validation for correct and incorrect counts. No App Server or model runs. [Chapter 10](10-automation.md) covers copying the starter, repairing the consumer and the thread/turn/item association contract.
+
 ## Optional installation
 
 Running from the checkout needs no installation. If you want the `codex-lab` command inside a virtual environment, install the local package. Build tooling may need access to a package index.

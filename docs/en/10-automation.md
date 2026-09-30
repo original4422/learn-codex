@@ -119,6 +119,47 @@ PY
 
 Python booleans subclass int, so validation uses exact type checks. It rejects `True` and also rejects integer `99` because it disagrees with the sample. No model is involved: this checks that the consumer does not blindly trust shape or prose.
 
+## Offline exercise: when may a client continue after compaction?
+
+This exercise adds the App Server asynchronous boundary rather than repeating the CLI event exercise. In the **pinned official implementation**, the [compaction processor](https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/app-server/src/request_processors/thread_processor.rs#L2407) submits `Op::Compact` and returns `{}`. The [official test](https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/app-server/tests/suite/v2/compaction.rs#L224) separately waits for the compaction item and its turn to complete. The RPC acknowledgment alone does not establish readiness to send a follow-up.
+
+**Teaching simplification:** the [four cases](../../examples/completion/cases.json) contain fictional event-field projections, not complete wire schemas or real model logs. The caller knows the target thread, compact/follow-up RPC IDs and historical `prior_turn_ids`. There is one pending manual compaction request and no competing new compaction. The consumer binds the current item/turn from the first nonhistorical `contextCompaction` start in the target thread; it cannot derive a turn ID from the empty acknowledgment. This contract does not classify arbitrary concurrent session logs.
+
+Copy the faulty consumer into a new practice directory, then run the trusted checker from the course checkout:
+
+```sh
+mkdir -p .local
+mkdir .local/completion-practice
+cp examples/completion/starter.py .local/completion-practice/consumer.py
+python3 examples/completion/acceptance.py --script .local/completion-practice/consumer.py
+# Compare the reference implementation:
+python3 examples/completion/acceptance.py
+```
+
+The practice directory must be new to preserve previous edits. The starter should exit 1: `first_failure` identifies prefix 1 of `ack-is-not-completion`, with expected `wait` and actual `continue`. The reference should exit 0.
+
+Repair only `progress(events, context)`. Its input grows from the empty event prefix; recompute state each time without mutating inputs. Return one of four actions:
+
+| Action | Meaning |
+| --- | --- |
+| `wait` | Evidence is incomplete; keep consuming events |
+| `continue` | Compact ack, bound compaction item completion and that turn's `completed` terminal state have arrived; send one follow-up |
+| `verify` | The turn bound by the follow-up RPC response has completed normally; perform business acceptance |
+| `failed` | A target RPC failed, or a bound turn is `failed` / `interrupted` |
+
+`continue` is a state, not a command to execute repeatedly. The caller sends the follow-up once and then adds its response to the sequence. The student function cannot declare business success.
+
+| Case | Boundary to recognize |
+| --- | --- |
+| Compact ack only | Keep waiting |
+| Old-turn, foreign-thread and wrong-item completion events | Do not borrow unrelated evidence; wait for the target turn after its item, then bind the follow-up separately |
+| Compact item completes, then its turn is interrupted | First `wait`, then `failed` |
+| Compact turn completes without the target item completion | Keep waiting |
+
+The checker compares every prefix against an expected action and reports the first wrong transition. The normal follow-up case then supplies both a correct summary and `open_tasks=99`. The external host reuses `validate_summary()` and must accept one and reject the other. Both answers share the same successful event sequence: turn completion does not decide task correctness. Keep your repair diff and explain why the starter continued early and which component rejects the wrong count.
+
+The command imports and executes your own practice file; this is local teaching acceptance, not a sandbox for untrusted code. It does not start Codex, connect to App Server or call a model.
+
 ## Troubleshooting and exercise
 
 | Symptom | Meaning and next step |

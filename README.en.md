@@ -72,7 +72,7 @@ Independent review added assertions that `done` preserves tags. The archived rea
 
 | Path | Verified capability |
 | --- | --- |
-| Offline course | 76 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
+| Offline course | 86 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
 | Mechanism labs | Scripted tool loop, instruction discovery, policy, context and parallel aggregation |
 | Real protocols | Python MCP stdio subprocess; Codex 0.155.1 CLI probe and App Server handshake |
 | Real model | One `exercise` run edited the starter and passed 6/6 external checks; private events, diff and hashes retained |

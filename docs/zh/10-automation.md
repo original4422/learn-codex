@@ -119,6 +119,47 @@ PY
 
 布尔值在 Python 中是 int 的子类，因此验证使用精确类型检查；`True` 应被拒绝，整数 `99` 也应因与样本不符而拒绝。这个测试不调用模型，专门验证消费者没有盲信 schema 或自然语言。
 
+## 离线练习：压缩确认后，什么时候才能续写？
+
+本练习补充 App Server 的异步边界，不重复 CLI 的事件实验。**固定版本官方实现**中，[压缩处理器](https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/app-server/src/request_processors/thread_processor.rs#L2407)提交 `Op::Compact` 后返回 `{}`；[官方测试](https://github.com/openai/codex/blob/be2951ea34f0d295ed0becf97079f92fa5f6950e/codex-rs/app-server/tests/suite/v2/compaction.rs#L224)另外等待压缩 item 完成和对应 turn 结束。因此 RPC ack 不能直接作为发送续写请求的依据。
+
+**教学简化：** [四个案例](../../examples/completion/cases.json)是固定虚构事件的字段投影，只包含消费函数要读的字段，不是完整 wire schema 或真实模型日志。调用者已知目标 thread、压缩与续写的 RPC ID，以及历史 `prior_turn_ids`；只有一个 pending 手动压缩请求，没有其他新的压缩任务竞争。消费函数从目标 thread 的第一个非历史 `contextCompaction` 开始事件绑定当前 item/turn，不能从空 ack 推导 turn ID。这个合同不用于判定任意并发会话日志。
+
+复制有缺陷的消费函数到新的练习目录，再运行课程目录中的可信验收器：
+
+```sh
+mkdir -p .local
+mkdir .local/completion-practice
+cp examples/completion/starter.py .local/completion-practice/consumer.py
+python3 examples/completion/acceptance.py --script .local/completion-practice/consumer.py
+# 对照参考实现：
+python3 examples/completion/acceptance.py
+```
+
+练习目录必须尚不存在，避免覆盖已做的修改。starter 应退出 1：`first_failure` 指向 `ack-is-not-completion` 的前缀 1，期望 `wait`，实际 `continue`。参考实现应退出 0。
+
+只修复 `progress(events, context)`。输入是从空前缀开始、逐步增长的事件列表；函数每次重新计算状态，不修改输入，只返回四种动作：
+
+| 动作 | 含义 |
+| --- | --- |
+| `wait` | 当前证据不足，继续读取事件 |
+| `continue` | 已收到 compact ack、绑定的压缩 item 完成及同 turn 的 `completed` 终态，可以发送一次续写 |
+| `verify` | 由续写 RPC 响应绑定的 turn 已正常结束，可以进行业务验收 |
+| `failed` | 目标 RPC 失败，或绑定的 turn 为 `failed` / `interrupted` |
+
+`continue` 是状态而非可重复执行的命令；本案例由调用者只发送一次续写，随后把其响应加入事件序列。学生函数不能返回“业务成功”。
+
+| 案例 | 必须识别的边界 |
+| --- | --- |
+| 只有 compact ack | 保持 `wait` |
+| 混入旧 turn、其他 thread、错误 item 的完成事件 | 不借用无关证据；目标 item 完成后仍等目标 turn，续写轮另行绑定 |
+| compact item 完成，随后 turn interrupted | 先 `wait`，再 `failed` |
+| compact turn completed，但缺少目标 item 完成 | 保持 `wait` |
+
+验收器逐个前缀比较期望动作，报告第一处错误推进。正常续写案例随后分别给出正确摘要和 `open_tasks=99`；外部宿主复用 `validate_summary()`，必须一通过、一拒绝。两个答案共享同一条成功事件序列，说明 turn 结束并不决定任务是否正确。保留修复 diff，并说明 starter 为什么提前续写、错误计数又由谁拒绝。
+
+这条命令导入你自己的练习文件执行；它是本地教学验收，不是运行不可信代码的沙箱。全程不启动 Codex、不连接 App Server、不调用模型。
+
 ## 故障排查与练习
 
 | 现象 | 含义与下一步 |

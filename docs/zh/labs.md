@@ -47,6 +47,15 @@ python3 examples/taskboard/.agents/skills/taskboard-check/scripts/check.py
 
 Skill 检查脚本是一组独立的 CLI 黑盒检查，可以作为完整测试之外的交叉证据；它不是完整测试套件的替代品。
 
+## 压缩与续写的离线完成判定
+
+```sh
+python3 examples/completion/acceptance.py
+python3 examples/completion/acceptance.py --script examples/completion/starter.py
+```
+
+第一条验收参考实现，退出 0；第二条拒绝把 compact ack 当成完成的 starter，退出 1。四个固定虚构案例逐个检查事件前缀，再用现有 Taskboard 摘要校验器验证正确答案和错误计数。它不启动 App Server 或模型。[第 10 章](10-automation.md)给出复制 starter、修复消费函数以及 thread/turn/item 关联的完整合同。
+
 ## 可选安装
 
 从仓库直接运行无需安装。若你想在虚拟环境里使用 `codex-lab` 命令，可安装本地包；构建工具可能需要访问包索引。
