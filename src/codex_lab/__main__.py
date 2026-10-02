@@ -6,7 +6,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-from . import adapters, mechanisms, mcp_server
+from . import adapters, mechanisms, mcp_server, exercise
 
 
 def main(argv=None):
@@ -36,6 +36,11 @@ def main(argv=None):
     execute.add_argument("--allow-model", action="store_true")
     execute.add_argument("--model")
     execute.add_argument("--timeout", type=float, default=120)
+    practice = commands.add_parser("exercise", help="real Taskboard coding task with independent acceptance")
+    practice.add_argument("--allow-model", action="store_true")
+    practice.add_argument("--codex-home", type=Path)
+    practice.add_argument("--model", default="gpt-6-sol")
+    practice.add_argument("--timeout", type=float, default=240)
     args = parser.parse_args(argv)
     try:
         if args.command == "loop":
@@ -57,13 +62,15 @@ def main(argv=None):
             result = adapters.probe()
         elif args.command == "app-server":
             result = adapters.app_server_handshake(args.timeout)
+        elif args.command == "exercise":
+            result = exercise.run(allow_model=args.allow_model, codex_home=args.codex_home, model=args.model, timeout=args.timeout)
         else:
             result = adapters.exec_summary(allow_model=args.allow_model, model=args.model, timeout=args.timeout)
     except (ValueError, OSError, RuntimeError, TimeoutError, subprocess.SubprocessError) as error:
         print(json.dumps({"status": "failed", "error": str(error)}, ensure_ascii=False), file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0
+    return 1 if args.command == "exercise" and result.get("status") == "failed" else 0
 
 
 if __name__ == "__main__":

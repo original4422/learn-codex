@@ -4,15 +4,17 @@
 
 [English](README.en.md) · [快速开始](docs/zh/quickstart.md) · [课程目录](docs/zh/index.md) · [验收记录](docs/zh/acceptance.md)
 
-面向有基本编程能力的学生与开发者，从一个真实的小改动出发，沿着「实际使用 → 可观察行为 → 公开源码 → 最小实验」学习 Codex。CLI 为主线，桌面端提供工作流补充。不是把另一套 Agent 教程换个名字，也不把 Python 教学模型称作 Codex 内核。
+面向有基本编程能力的学生与开发者，从一个真实的小改动出发，沿着「实际使用 → 可观察行为 → 公开源码 → 最小实验」学习 Codex。CLI 为主线，桌面端提供工作流补充。通过 Taskboard 标签功能练习、事件输出和独立验收，把使用方法与实现机制连起来。
 
 ![从要求到证据的循环](site/assets/loop-zh.svg)
 
 ## 先跑起来
 
-需要 Python 3.10+。离线课程与网站无第三方运行依赖，无需 Key。
+需要 Git 和 Python 3.10+。离线课程与网站只用 Python 标准库，无需安装 Python 包或配置 Key。以下命令从仓库根目录运行。
 
 ```sh
+git clone https://github.com/original4422/learn-codex.git
+cd learn-codex
 python3 scripts/course.py check
 python3 scripts/course.py lab loop
 python3 scripts/course.py serve --port 8765
@@ -56,10 +58,29 @@ CODEX_HOME="$PWD/.cache/codex-home" codex login
 python3 scripts/course.py lab exec --allow-model
 ```
 
-本地模拟、真实协议、真实模型三种验证分别记录。交付环境的真实 CLI / App Server 已验证；一次未指定模型、未登录的 CLI 在线执行尝试在本地超时，没有证据确认请求到达了哪个模型服务。真实模型仍未验证，详情见[验收记录](docs/zh/acceptance.md)。
+要用已有登录完成一次真实编程练习，显式选择对应 home：
+
+```sh
+python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex" --timeout 240
+```
+
+命令复制 starter 到新工作区，先验证沙箱阻止读取答案、验收器与登录目录，再运行原生 Codex，最后独立检查六项行为。每次尝试保存在忽略的 `.cache/exercises/` 中。参见[协议与实测结果](reports/taskboard-live-exercise-2026-09-30.md)及[实验指南](docs/zh/labs.md)。默认测试和 CI 仍为离线运行。
+
+独立复核后补充了 `done` 保留标签的验收断言；已保存的真实候选在增强后的沙箱验收中仍为 6/6，见[无模型重验记录](reports/taskboard-tags-recheck-2026-09-30.md)。
+
+## 当前能力与验证
+
+| 路径 | 已验证能力 |
+| --- | --- |
+| 离线课程 | 76 项行为测试、6 项 Taskboard 验收；中文与英文网站共 39 页 |
+| 机制实验 | 固定脚本工具循环、指令发现、策略、上下文和并发聚合 |
+| 真实协议 | Python MCP stdio 子进程；Codex 0.155.1 CLI 探测与 App Server 握手 |
+| 真实模型 | `exercise` 一次真实读改自检，通过 6/6 外部验收；保留事件、diff 与 hash |
+
+离线机制实验是教学简化；Taskboard 使用单写者 JSON 存储。真实 CLI 记录采集于 2026-09-19；最近的离线验收见 [2026-09-30 记录](reports/taskboard-acceptance-2026-09-30.md)，历史验证详情见[验收记录](docs/zh/acceptance.md)。
 
 ## 版本、范围与许可证
 
 核实日期：2026-09-19。源码固定到 `rust-v0.155.1` / `be2951ea34f0d295ed0becf97079f92fa5f6950e`；链接、哈希与证据保存在 [upstream.json](references/upstream.json)。官方在线文档会持续变化，正文注明对应边界。
 
-本项目为独立教学作品，原始代码、文案与图解采用 [MIT](LICENSE)。上游 Codex 为 Apache-2.0；保留源码链接与归属。当前 v1 仅交付本地仓库和预览，无远端仓库、公开部署或社媒发布。
+本项目为独立教学作品，原始代码、文案与图解采用 [MIT](LICENSE)。上游 [OpenAI Codex](https://github.com/openai/codex) 采用 Apache-2.0；本仓库通过固定版本链接引用其公开实现，源码快照留在忽略的本地缓存中。网站可按上述命令本地预览。

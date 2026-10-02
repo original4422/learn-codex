@@ -17,6 +17,7 @@ This is both an experiment index and a reproduction guide. From the repository r
 | `probe` | Installed version and required flags | Real CLI, no model |
 | `app-server` | initialize → initialized → thread/loaded/list | Real App Server, no model |
 | `exec --allow-model` | JSONL events, structured output and factual checks | Real model; authentication required |
+| `exercise --allow-model` | Edit the starter and independently check six behaviors | Real coding task; authentication required |
 
 ## Run and interpret output
 
@@ -36,6 +37,8 @@ The subagent simulation's `verified_against_snapshot: true` means only that a lo
 The [reference implementation](../../examples/taskboard/taskboard.py) provides `add`, `list`, `done` and tag filtering. A nonexistent store means an empty list; corrupt JSON is an explicit failure and is never silently replaced with an empty store. Tests cover legacy data, empty titles, missing tasks, exact tag matching, store validation and failed atomic replacement.
 
 Chapter 1 creates an exercise copy where you implement filtering while preserving the existing interface. Chapter 2 checks failure and regression paths. Chapter 5 packages acceptance in a callable Skill. Keep the starter and final diff for a useful retrospective instead of editing the reference merely to manufacture a passing exercise.
+
+Run `python3 examples/taskboard/acceptance.py --script .local/taskboard-practice/taskboard.py` to check your exercise. Its six checks cover the basic CLI, tag normalization and sorting, exact filtering, legacy records, and data preservation. Boundary checks accept 40-character tags and 20 distinct normalized tags, including repeated input values. Empty tags, 41-character tags and 21 distinct tags must exit with code 2 and preserve the store byte for byte. The course tests also verify that the checker rejects implementations with tag validation or sorting removed.
 
 ```sh
 python3 scripts/course.py test
@@ -69,6 +72,20 @@ python3 scripts/course.py lab exec --allow-model --timeout 120
 The model experiment asks Codex to read a fixed sample and return `project`, `total_tasks`, `open_tasks` and `summary`. The adapter checks the exit code, `turn.completed`, error events, JSON fields and counts against the actual sample. Valid JSON alone does not establish a correct answer.
 
 The sample has three tasks, two open. Its JSON Schema is written to `.cache/real-exec/schema.json`. Each run clears earlier output and flushes incoming events to `events.jsonl`; the final message is in `last-message.json`. A timeout preserves the partial events received during this run. A partial stream is not success: check the CLI error, completion event and validated result together. Do not commit real logs containing personal context.
+
+## Real coding exercise
+
+`exercise` copies the starter into a fresh `.cache/exercises/taskboard-*/workspace`, lets real Codex read, edit and self-check it, then runs six checks from an evaluator outside the workspace. It defaults to the course `.cache/codex-home`; explicitly select an already authenticated Codex home when desired:
+
+```sh
+python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex" --model gpt-6-sol --timeout 240
+```
+
+The command uses that login without copying credentials or rewriting configuration. It runs with `--ignore-user-config` and `--ephemeral`. Native tools use a temporary named permission profile that denies the user home and course checkout, with a more specific read/write entry for the candidate directory. A real sandbox probe first checks that the reference answer, external evaluator and login directory cannot be read; failure stops before any model call. This path requires a CLI supporting named filesystem permissions and `codex sandbox`; the measured version is 0.155.1 on macOS.
+
+Each attempt has its own directory: `phases.jsonl` records preparation, isolation, model and independent acceptance stages; `events.jsonl` contains actual model events; `candidate.diff` compares against the starter; `result.json` stores six verdicts, elapsed time and source hashes. The model deadline defaults to 240 seconds (maximum 600), and execution stops after more than 20 completed tool events. There is no automatic retry. Failed attempts retain their evidence. Exit 0 means independent acceptance passed, 1 means an attempted run did not pass, and 2 means an argument or authentication precondition failed.
+
+Default `check` and CI run offline tests only. They verify rejection of the starter, a substring-filter mutation, a missing tag-length-limit mutation and a `done`-clears-tags mutation. Private model transcripts stay in ignored `.cache/`; see the [real coding record](../../reports/taskboard-live-exercise-2026-09-30.md) and the [no-model recheck with strengthened tag-preservation assertions](../../reports/taskboard-tags-recheck-2026-09-30.md) for public results.
 
 ## Troubleshooting order
 

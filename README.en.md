@@ -4,15 +4,17 @@
 
 [中文](README.md) · [Quickstart](docs/en/quickstart.md) · [Course](docs/en/index.md) · [Acceptance record](docs/en/acceptance.md)
 
-A practical course for students and developers with basic programming knowledge. Start with a real change, then move through **actual use → observable behavior → public source → minimal experiments**. The CLI is the main path, with a desktop workflow supplement. The course is built around Codex usage rather than renaming another Agent tutorial; its Python teaching models are explicitly distinguished from the Codex core.
+A practical course for students and developers with basic programming knowledge. Start with a real change, then move through **actual use → observable behavior → public source → minimal experiments**. The CLI is the main path, with a desktop workflow supplement. The Taskboard tag exercise, event output and independent acceptance checks connect everyday usage to implementation mechanisms.
 
 ![From requirements to evidence](site/assets/loop-en.svg)
 
 ## Run it first
 
-Python 3.10+ is required. The offline course and site have no third-party runtime dependencies and need no key.
+Git and Python 3.10+ are required. The offline course and site use only the Python standard library; no Python package installation or key is needed. Run the following commands from the repository root.
 
 ```sh
+git clone https://github.com/original4422/learn-codex.git
+cd learn-codex
 python3 scripts/course.py check
 python3 scripts/course.py lab loop
 python3 scripts/course.py serve --port 8765
@@ -56,10 +58,29 @@ CODEX_HOME="$PWD/.cache/codex-home" codex login
 python3 scripts/course.py lab exec --allow-model
 ```
 
-Simulations, real protocols and real model runs are recorded separately. The delivery environment passed real CLI and App Server checks. An unauthenticated CLI execution attempt with no explicit model selection timed out locally; the evidence does not establish which model service, if any, received a request. Real model behavior remains unverified; see the [acceptance record](docs/en/acceptance.md).
+For a complete coding exercise using an existing login, explicitly select its home:
+
+```sh
+python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex" --timeout 240
+```
+
+The command copies the starter into a fresh workspace, verifies that the sandbox blocks the reference/evaluator/login directory, runs native Codex, and independently checks six behaviors. It preserves each attempt under ignored `.cache/exercises/`. See the [protocol and measured result](reports/taskboard-live-exercise-2026-09-30.md) and [lab guide](docs/en/labs.md). Default tests and CI stay offline.
+
+Independent review added assertions that `done` preserves tags. The archived real candidate still passes 6/6 under the strengthened sandboxed evaluation; see the [no-model recheck](reports/taskboard-tags-recheck-2026-09-30.md).
+
+## Current capabilities and verification
+
+| Path | Verified capability |
+| --- | --- |
+| Offline course | 76 behavior tests, 6 Taskboard acceptance checks and 39 Chinese/English site pages |
+| Mechanism labs | Scripted tool loop, instruction discovery, policy, context and parallel aggregation |
+| Real protocols | Python MCP stdio subprocess; Codex 0.155.1 CLI probe and App Server handshake |
+| Real model | One `exercise` run edited the starter and passed 6/6 external checks; private events, diff and hashes retained |
+
+Offline mechanism labs are teaching simplifications. Taskboard uses a single-writer JSON store. Real CLI evidence was collected on 2026-09-19; see the [2026-09-30 offline results](reports/taskboard-acceptance-2026-09-30.md) and [historical acceptance record](docs/en/acceptance.md).
 
 ## Version, scope and license
 
 Checked on 2026-09-19. Source is pinned to `rust-v0.155.1` / `be2951ea34f0d295ed0becf97079f92fa5f6950e`; links, hashes and evidence are in [upstream.json](references/upstream.json). Live official documentation continues to change; chapters explain relevant boundaries.
 
-This independent educational project licenses its original code, prose and diagrams under [MIT](LICENSE). Upstream Codex is Apache-2.0; source links and attribution are retained. This v1 delivers a local repository and preview only, with no remote repository, public deployment or social publishing.
+This independent educational project licenses its original code, prose and diagrams under [MIT](LICENSE). Upstream [OpenAI Codex](https://github.com/openai/codex) is Apache-2.0. This repository links to its public implementation at a pinned version; downloaded source snapshots stay in the ignored local cache. Preview the website locally with the commands above.

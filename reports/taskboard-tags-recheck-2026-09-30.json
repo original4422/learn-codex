@@ -1,0 +1,60 @@
+{
+  "verification": "no-model recheck of the archived real coding candidate with strengthened external acceptance",
+  "checked_at": "2026-09-29T21:42:39.190623+00:00",
+  "cli_version": "codex-cli 0.155.1",
+  "source_commit": "2a0226e519d6c608a3f12db6f7bf5bc1f7f2f8f7",
+  "original_result": "taskboard-exercise-result.json",
+  "original_result_sha256": "9e9b12315d68427760dcff962b2d43ae6c96e4ac32c006ce5d1e4aeecf0c6622",
+  "original_oracle_sha256": "22446525017ecd063dcef57d19b34f51aa873a6aa5331caf887538ae8b88d563",
+  "oracle_sha256": "0d3aef4140ac9586d521559a6a6fb89ef012bbb43464f12de562f99d78e8809d",
+  "candidate_sha256": "7e4782e2f2e1ef60ae4fefdfce37847c90baee435406387a02e5170bf08aadc4",
+  "model_calls": 0,
+  "isolation": "workspace read/write allowed; answer, oracle, auth directory denied",
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "test_01_basic_roundtrip",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_02_tags_normalize_deduplicate_and_match_exactly",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_03_legacy_data_uses_empty_tags_and_next_max_id",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_04_failed_operations_preserve_store",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_05_tag_limits_accept_boundary_values_after_normalization",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "check": "test_06_invalid_tags_fail_without_changing_store",
+        "passed": true,
+        "failures": 0,
+        "errors": 0
+      }
+    ]
+  },
+  "mutation_control": {
+    "change": "set task[\"tags\"] = [] immediately after task[\"done\"] = True",
+    "original_oracle": "6/6 passed; false positive",
+    "strengthened_oracle": "test_02 rejects; regression test passes"
+  },
+  "original_measurement_unchanged": true
+}
