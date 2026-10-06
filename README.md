@@ -72,7 +72,7 @@ python3 scripts/course.py lab exercise --allow-model --codex-home "$HOME/.codex"
 
 | 路径 | 已验证能力 |
 | --- | --- |
-| 离线课程 | 76 项行为测试、6 项 Taskboard 验收；中文与英文网站共 39 页 |
+| 离线课程 | 86 项行为测试、6 项 Taskboard 验收；中文与英文网站共 39 页 |
 | 机制实验 | 固定脚本工具循环、指令发现、策略、上下文和并发聚合 |
 | 真实协议 | Python MCP stdio 子进程；Codex 0.155.1 CLI 探测与 App Server 握手 |
 | 真实模型 | `exercise` 一次真实读改自检，通过 6/6 外部验收；保留事件、diff 与 hash |

@@ -92,3 +92,5 @@ You should now explain why recoverability does not mean every original log line 
 Add a “read-only review, do not edit code” constraint and five lengthy tool logs. Verify the constraint survives and the budget holds. Then exceed the budget with protected entries alone. Explain why explicitly narrowing scope is more auditable than silently trimming constraints.
 
 Next, give the task a bounded tool in [08 · MCP](08-mcp.md).
+
+Continue with the [offline compaction follow-up exercise in chapter 10](10-automation.md): repair a consumer that continues on compact acknowledgment, then separate compaction completion from follow-up business acceptance. Its fictional events do not measure real model summary quality.
